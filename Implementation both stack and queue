@@ -1,0 +1,295 @@
+#include<iostream>
+#include<stdlib.h>
+using namespace std;
+
+void stack1();
+void Queue1();
+
+void push();
+void pop();
+void display_s();
+int isFull_s();
+int isEmpty_s();
+void peek();
+void enqueue(int ele);
+void dequeue();
+void display_q();
+int isFull_q();
+int isEmpty_q();
+
+
+
+
+int main()
+{
+    int CHOICE;
+    cout<<"1.stack\n2.Queue\n";
+    while(1)
+    {
+        cout<<"\nChoice:";
+        cin>>CHOICE;
+        switch(CHOICE)
+        {
+            case 1:stack1();
+                break;
+            case 2:Queue1();
+                break;
+            default: cout<<"Program Terminated!!!\n";
+			    exit(0);
+                
+        }
+    }
+    return 0;
+}
+int stack[20];
+int top=-1, size_stack=5;
+
+void stack1()
+{
+	int choice_for_stack;
+	cout<<"1.Push\n2.Pop\n3.Display\n4.isFull\n5.isEmpty\n6.Peek\n";
+	while(1)
+	{
+		cout<<"Choice:";
+		cin>>choice_for_stack;
+		switch(choice_for_stack)
+		{
+			case 1: push();
+					break;
+			case 2: pop();
+					break;
+			case 3: display_s();
+					break;
+			case 4: if(isFull_s())
+						cout<<"Stack is FULL\n";
+					else
+						cout<<"Stack is NOT FULL\n";
+					break;
+			case 5: if(isEmpty_s())
+						cout<<"Stack is EMPTY\n";
+					else
+						cout<<"Stack is NOT EMPTY\n";
+					break;
+			case 6: peek();
+					break;
+			default: cout<<"Program Terminated!!!\n";
+					exit(0);
+		}
+	}
+}
+void push()
+{
+	int element;
+	if(top==size_stack-1)
+		cout<<"Stack Overflow"<<endl;
+	else
+	{
+		cout<<"Enter the element: ";
+		cin>>element;
+		stack[++top]=element;
+	}
+		
+}
+void pop()
+{
+	if(top==-1)
+		cout<<"Stack Underflow\n";
+	else
+		cout<<"Popped Element = " <<stack[top--]<<endl;
+}
+void display_s()
+{
+	int i;
+	if(top==-1)
+		cout<<"Stack Empty\n";
+	else
+	{
+		cout<<"Elements: ";
+		for(i=top;i>=0;i--)
+			cout<<stack[i]<<" ";
+		cout<<endl;
+	}
+}
+int isFull_s()
+{
+ if(top==size_stack-1)
+   return 1;
+else
+  return 0;
+}
+int isEmpty_s()
+{
+ if(top==-1)
+   return 1;
+else
+  return 0;
+}
+void peek()
+{
+	if(top==-1)
+		cout<<"Stack Underflow"<<endl;
+	else
+ 		cout<<"Peek = "<<stack[top];
+}
+
+int queue[100],size_queue=3;
+int front=-1,rear=-1;
+
+
+void Queue1()
+{
+	int choice_for_Queue,ele;
+	cout<<"1.Enqueue\n2.Dequeue\n3.Display\n4.isFull\n5.isEmpty\n";
+	while(1)
+	{
+		cout<<"Choice:";
+		cin>>choice_for_Queue;
+		switch(choice_for_Queue)
+		{
+			case 1: cout<<"Enter the element: ";
+					cin>>ele;
+					enqueue(ele);
+					break;
+			case 2: dequeue();
+					break;
+			case 3: display_q();
+					break;
+			case 4: if(isFull_q()) cout<<"Queue is full\n";
+					else cout<<"Queue is not full\n";
+					break;
+			case 5: if(isEmpty_q()) cout<<"Queue is empty\n";
+					else cout<<"Queue is not empty\n";
+					break;
+			default: cout<<"Program Terminated!!!";
+					exit(0);
+		}
+	}
+}
+void enqueue(int ele)
+{
+	if(rear==size_queue-1)
+	{
+		cout<<"Queue Overflow\n";
+		return;
+	}
+	else if((rear==-1)&&(front==-1))
+		front=rear=0;
+	else
+		rear=rear+1;
+	queue[rear]=ele;
+}
+void dequeue()
+{
+	if(front==-1)
+		cout<<"Queue Unerflow\n";
+	else 
+	{
+		cout<<"Dequeued Element = "<<queue[front]<<endl;
+		if(front==rear)
+			front=rear=-1;
+		else
+			front++;
+	}
+}
+void display_q()
+{
+	int i;
+	if((rear==-1)||(front==-1))
+		cout<<"Queue Empty\n";
+	else
+	{
+		cout<<"Elements: ";
+		for(i=front;i<=rear;i++)
+			cout<<queue[i]<<" ";
+		cout<<endl;
+	}
+}
+int isFull_q()
+{
+	if(rear==size_queue-1) 
+		return 1;
+	return 0;
+}
+int isEmpty_q()
+{
+	if(front==-1) //rear==-1
+		return 1;
+	return 0;
+}
+
+
+
+OUTPUT 1:
+
+
+1.stack
+2.Queue
+
+Choice :1 //choice for stack
+1.Push
+2.Pop
+3.Display
+4.isFull
+5.isEmpty
+6.Peek
+Choice:1
+Enter the element: 10
+Choice:1
+Enter the element: 20
+Choice:1
+Enter the element: 30
+Choice:1
+Enter the element: 40
+Choice:3
+Elements: 40 30 20 10 
+Choice:2
+Popped Element = 40
+Choice:2
+Popped Element = 30
+Choice:4
+Stack is NOT FULL
+Choice:2
+Popped Element = 20
+Choice:2
+Popped Element = 10
+Choice:5
+Stack is EMPTY
+Choice:10
+Program Terminated!!!
+
+
+OUTPUT 2:
+
+
+1.stack
+2.Queue
+
+Choice:2
+1.Enqueue
+2.Dequeue
+3.Display
+4.isFull
+5.isEmpty
+Choice:1
+Enter the element: 5
+Choice:1
+Enter the element: 15
+Choice:1
+Enter the element: 25
+Choice:1
+Enter the element: 35
+Queue Overflow
+Choice:2
+Dequeued Element = 5
+Choice:2
+Dequeued Element = 15
+Choice:2
+Dequeued Element = 25
+Choice:2
+Queue Unerflow
+Choice:3
+Queue Empty
+Choice:5
+Queue is empty
+Choice:10
+Program Terminated!!!
