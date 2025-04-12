@@ -1,0 +1,135 @@
+#include<iostream>
+using namespace std;
+void push();
+void pop();
+void display();
+int isFull();
+int isEmpty();
+void peek();
+
+int stack[20];
+int top=-1, size=5;
+
+int main()
+{
+	int choice,ele;
+	cout<<"1.Push\n2.Pop\n3.Display\n4.isFull\n5.isEmpty\n6.Peek\n";
+	while(1)
+	{
+		cout<<"Choice:";
+		cin>>choice;
+		switch(choice)
+		{
+			case 1: push();
+					break;
+			case 2: pop();
+					break;
+			case 3: display();
+					break;
+			case 4: if(isFull())
+						cout<<"Stack is FULL\n";
+					else
+						cout<<"Stack is NOT FULL\n";
+					break;
+			case 5: if(isEmpty())
+						cout<<"Stack is EMPTY\n";
+					else
+						cout<<"Stack is NOT EMPTY\n";
+					break;
+			case 6: peek();
+					break;
+			default: cout<<"Program Terminated!!!\n";
+					exit(0);
+		}
+	}
+	return 0;
+}
+void push()
+{
+	int element;
+	if(top==size-1)
+		cout<<"Stack Overflow"<<endl;
+	else
+	{
+		cout<<"Enter the element: ";
+		cin>>element;
+		stack[++top]=element;
+	}
+		
+}
+void pop()
+{
+	if(top==-1)
+		cout<<"Stack Underflow\n";
+	else
+		cout<<"Popped Element = " <<stack[top--]<<endl;
+}
+void display()
+{
+	int i;
+	if(top==-1)
+		cout<<"Stack Empty\n";
+	else
+	{
+		cout<<"Elements: ";
+		for(i=top;i>=0;i--)
+			cout<<stack[i]<<" ";
+		cout<<endl;
+	}
+}
+int isFull()
+{
+ if(top==size-1)
+   return 1;
+else
+  return 0;
+}
+int isEmpty()
+{
+ if(top==-1)
+   return 1;
+else
+  return 0;
+}
+void peek()
+{
+	if(top==-1)
+		cout<<"Stack Underflow"<<endl;
+	else
+ 		cout<<"Peek = "<<stack[top];
+}
+
+OUTPUT:
+     
+1.Push
+2.Pop
+3.Display
+4.isFull
+5.isEmpty
+6.Peek
+Choice:1
+Enter the element: 10
+Choice:1
+Enter the element: 20
+Choice:1
+Enter the element: 30
+Choice:1
+Enter the element: 40
+Choice:3
+Elements: 40 30 20 10 
+Choice:2
+Popped Element = 40
+Choice:2
+Popped Element = 30
+Choice:4
+Stack is NOT FULL
+Choice:2
+Popped Element = 20
+Choice:2
+Popped Element = 10
+Choice:5
+Stack is EMPTY
+Choice:6
+Stack Underflow
+Choice:10
+Program Terminated!!!
