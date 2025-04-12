@@ -1,0 +1,120 @@
+#include<iostream>
+using namespace std;
+#include<stdlib.h>
+void enqueue(int ele);
+void dequeue();
+void display();
+int isFull();
+int isEmpty();
+int queue[100],size=3;
+int front=-1,rear=-1;
+int main()
+{
+	int choice,ele;
+	cout<<"1.Enqueue\n2.Dequeue\n3.Display\n4.isFull\n5.isEmpty\n";
+	while(1)
+	{
+		cout<<"Choice:";
+		cin>>choice;
+		switch(choice)
+		{
+			case 1: cout<<"Enter the element: ";
+					cin>>ele;
+					enqueue(ele);
+					break;
+			case 2: dequeue();
+					break;
+			case 3: display();
+					break;
+			case 4: if(isFull()) cout<<"Queue is full\n";
+					else cout<<"Queue is not full\n";
+					break;
+			case 5: if(isEmpty()) cout<<"Queue is empty\n";
+					else cout<<"Queue is not empty\n";
+					break;
+			default: cout<<"Program Terminated!!!";
+					exit(0);
+		}
+	}
+}
+void enqueue(int ele)
+{
+	if(rear==size-1)
+	{
+		cout<<"Queue Overflow\n";
+		return;
+	}
+	else if((rear==-1)&&(front==-1))
+		front=rear=0;
+	else
+		rear=rear+1;
+	queue[rear]=ele;
+}
+void dequeue()
+{
+	if(front==-1)
+		cout<<"Queue Unerflow\n";
+	else 
+	{
+		cout<<"Dequeued Element = "<<queue[front]<<endl;
+		if(front==rear)
+			front=rear=-1;
+		else
+			front++;
+	}
+}
+void display()
+{
+	int i;
+	if((rear==-1)||(front==-1))
+		cout<<"Queue Empty\n";
+	else
+	{
+		cout<<"Elements: ";
+		for(i=front;i<=rear;i++)
+			cout<<queue[i]<<" ";
+		cout<<endl;
+	}
+}
+int isFull()
+{
+	if(rear==size-1) 
+		return 1;
+	return 0;
+}
+int isEmpty()
+{
+	if(front==-1) //rear==-1
+		return 1;
+	return 0;
+}
+
+OUTPUT:
+
+1.Enqueue
+2.Dequeue
+3.Display
+4.isFull
+5.isEmpty
+Choice:1
+Enter the element: 10
+Choice:1
+Enter the element: 20
+Choice:1
+Enter the element: 30
+Choice:3
+Elements: 10 20 30 
+Choice:2
+Dequeued Element = 10
+Choice:2
+Dequeued Element = 20
+Choice:3
+Elements: 30 
+Choice:2
+Dequeued Element = 30
+Choice:5
+Queue is empty
+Choice:4
+Queue is not full
+Choice:10
+Program Terminated!!!
