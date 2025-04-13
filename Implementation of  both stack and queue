@@ -263,7 +263,7 @@ OUTPUT 2:
 1.stack
 2.Queue
 
-Choice:2
+Choice:2.  //coice for queue
 1.Enqueue
 2.Dequeue
 3.Display
